@@ -24,4 +24,5 @@ In order to connect your app with any service, you need to add the following to 
     - MySQL service, you can use the connection string `mysql://mysql:3306/`.
     - Elasticsearch service, you can use the connection string `http://elasticsearch:9200/`.
 
-- In order to use adminer, go to `https://{VIRTUAL_HOST}/`. 
+- In order to use adminer, go to `https://{VIRTUAL_HOST}/`.
+- In order to use kibana, go to `https://{VIRTUAL_HOST}/`.

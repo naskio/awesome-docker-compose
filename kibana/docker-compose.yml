@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  kibana:
+    image: kibana:7.16.2
+    container_name: kibana
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+      #      ELASTICSEARCH_USERNAME: kibana_system
+      #      ELASTICSEARCH_PASSWORD: CHANGEME
+      VIRTUAL_PORT: "5601" # Kibana UI exposed from this port
+    expose:
+      - "5601"
+    networks:
+      - auto-reverse-proxy-global-network
+      - elasticsearch_service-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  elasticsearch_service-network:
+    external: true
