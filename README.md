@@ -23,6 +23,13 @@ In order to connect your app with any service, you need to add the following to 
     - Postgis service, you can use the connection string `postgres://postgres:5432/`.
     - MySQL service, you can use the connection string `mysql://mysql:3306/`.
     - Elasticsearch service, you can use the connection string `http://elasticsearch:9200/`.
+    - Minio service, you can use the connection string `http://minio:9000/`.
+    - RabbitMQ service, you can use the connection string `amqp://rabbitmq:5672/`.
 
 - In order to use adminer, go to `https://{VIRTUAL_HOST}/`.
 - In order to use kibana, go to `https://{VIRTUAL_HOST}/`.
+
+## Alternative strategy
+
+Define all services in one `docker-compose.yml` file, and then run `docker-compose up -d` to start all services or start
+only few services `docker-compose up -d minio`
