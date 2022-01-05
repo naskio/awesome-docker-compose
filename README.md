@@ -25,11 +25,12 @@ In order to connect your app with any service, you need to add the following to 
     - Elasticsearch service, you can use the connection string `http://elasticsearch:9200/`.
     - Minio service, you can use the connection string `http://minio:9000/`.
     - RabbitMQ service, you can use the connection string `amqp://rabbitmq:5672/`.
+    - RabbitMQ with management plugin, you can use the connection string `amqp://rabbitmq_mngt:5672/`.
 
 - In order to use adminer, go to `https://{VIRTUAL_HOST}/`.
 - In order to use kibana, go to `https://{VIRTUAL_HOST}/`.
 - In order to use rabbitmq manager, go to `https://{VIRTUAL_HOST}/`.
-- In order to use Grafana, go to `https://{VIRTUAL_HOST}/`.
+- In order to use Flower, go to `https://{VIRTUAL_HOST}/`.
 
 ## Alternative strategy
 

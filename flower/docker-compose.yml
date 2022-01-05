@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  flower:
+    restart: always
+    image: mher/flower
+    container_name: flower
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: 5555 # Flower UI exposed from this port
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      FLOWER_BROKER: ${FLOWER_BROKER}
+    expose:
+      - 5555
+    networks:
+      - auto-reverse-proxy-global-network
+      - rabbitmq_service-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  rabbitmq_service-network:
+    external: true
