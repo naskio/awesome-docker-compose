@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  adminer: # adminer is a php-based interface for managing databases
+    restart: always
+    image: adminer
+    container_name: adminer
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "8080" # Adminer UI exposed from this port
+    expose:
+      - "8080"
+    networks:
+      - auto-reverse-proxy-global-network
+      - postgres_service-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
