@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  rabbitmq_mgmt:
+    restart: always
+    image: rabbitmq:3-management
+    container_name: rabbitmq_mgmt
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "15672" # management plugin UI exposed from this port
+    expose:
+      - 5672 # rabbitmq
+      - 15672 # management plugin UI
+    volumes:
+      - etc:/etc/rabbitmq/
+      - data:/var/lib/rabbitmq/
+      - logs:/var/log/rabbitmq/
+    networks:
+      - auto-reverse-proxy-global-network
+      - service-network
+
+volumes:
+  etc:
+  data:
+  logs:
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  service-network:

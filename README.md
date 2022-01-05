@@ -28,6 +28,8 @@ In order to connect your app with any service, you need to add the following to 
 
 - In order to use adminer, go to `https://{VIRTUAL_HOST}/`.
 - In order to use kibana, go to `https://{VIRTUAL_HOST}/`.
+- In order to use rabbitmq manager, go to `https://{VIRTUAL_HOST}/`.
+- In order to use Grafana, go to `https://{VIRTUAL_HOST}/`.
 
 ## Alternative strategy
 

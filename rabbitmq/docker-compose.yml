@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    restart: always
+    image: rabbitmq:3
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
+    expose:
+      - 5672 # rabbitmq
+    volumes:
+      - etc:/etc/rabbitmq/
+      - data:/var/lib/rabbitmq/
+      - logs:/var/log/rabbitmq/
+    networks:
+      - service-network
+
+volumes:
+  etc:
+  data:
+  logs:
+
+networks:
+  service-network:
