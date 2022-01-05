@@ -3,4 +3,4 @@
 ## Prerequisites
 
 - Usage of `jwilder/nginx-proxy`
-- An existing docker network `auto-reverse-proxy-global-network`
+- existing docker networks `auto-reverse-proxy-global-network` and `postgres_service-network`

@@ -19,3 +19,5 @@ services:
 networks:
   auto-reverse-proxy-global-network:
     external: true
+  postgres_service-network:
+    external: true
