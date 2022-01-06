@@ -14,12 +14,14 @@ services:
     volumes:
       - data:/data/db
       - logs:/var/log/mongodb
+      - configdb:/data/configdb
     networks:
       - service-network
 
 volumes:
   data:
   logs:
+  configdb:
 
 networks:
   service-network:
