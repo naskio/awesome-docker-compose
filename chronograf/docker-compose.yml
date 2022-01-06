@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  chronograf:
+    image: chronograf:latest
+    container_name: chronograf
+    restart: always
+    expose:
+      - "8888"
+    volumes:
+      - data:/var/lib/chronograf
+    environment:
+      INFLUXDB_URL: http://influxdb:8086
+      INFLUXDB_USERNAME: ${INFLUXDB_USERNAME}
+      INFLUXDB_PASSWORD: ${INFLUXDB_PASSWORD}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: 8888 # UI exposed from this port
+    networks:
+      - auto-reverse-proxy-global-network
+      - influxdb_service-network
+
+volumes:
+  data:
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  influxdb_service-network:
+    external: true
