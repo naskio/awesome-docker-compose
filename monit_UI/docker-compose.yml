@@ -7,12 +7,13 @@ services:
     cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
     container_name: monit_UI
     expose:
-      - 2812
+      - 80
     environment:
+      PORTS: "80:2812" # mappings
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
-      VIRTUAL_PORT: 2812 # Monit UI exposed from this port
+      VIRTUAL_PORT: 80 # Monit UI exposed from this port from container
     networks:
       - auto-reverse-proxy-global-network
 
