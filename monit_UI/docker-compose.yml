@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  monit_UI:
+    restart: always
+    image: qoomon/docker-host
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    container_name: monit_UI
+    expose:
+      - 2812
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: 2812 # Monit UI exposed from this port
+    networks:
+      - auto-reverse-proxy-global-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
