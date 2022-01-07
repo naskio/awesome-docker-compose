@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mongo-express:
+    restart: always
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "8081" # UI exposed from this port
+      ME_CONFIG_BASICAUTH_USERNAME: ${ME_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASSWORD}
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+      ME_CONFIG_MONGODB_URL: "mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017/?ssl=false" # "mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017/${MONGO_DB}?ssl=false"
+      VCAP_APP_HOST: ${VIRTUAL_HOST}
+    expose:
+      - "8081"
+    networks:
+      - auto-reverse-proxy-global-network
+      - mongodb_service-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  mongodb_service-network:
+    external: true
