@@ -13,8 +13,7 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: ${ME_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASSWORD}
       ME_CONFIG_MONGODB_ENABLE_ADMIN: true
-      ME_CONFIG_MONGODB_URL: "mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017/?ssl=false" # "mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017/${MONGO_DB}?ssl=false"
-      VCAP_APP_HOST: ${VIRTUAL_HOST}
+      ME_CONFIG_MONGODB_URL: "mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017" # "mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017/${MONGO_DB}?ssl=false"
     expose:
       - "8081"
     networks:
