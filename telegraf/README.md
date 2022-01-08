@@ -14,11 +14,11 @@ Configured with the following plugins:
 
 ```
 docker exec -it telegraf bash
-telegraf -config /etc/telegraf/telegraf.conf -test
+telegraf -test -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d/
 ```
 
 ## Display logs
 
 ```
-cat /home/__docker_volumes__/telegraf_logs/_data/telegraf.log
+/telegraf_logs/_data/telegraf.log
 ```
