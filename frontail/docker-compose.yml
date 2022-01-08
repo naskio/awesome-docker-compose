@@ -7,7 +7,7 @@ services:
     container_name: frontail
     expose:
       - 9001
-    command: "-f /var/log/frontail -U ${FRONTAIL_USERNAME} -P ${FRONTAIL_PASSWORD}" # args will be forwarded to the entrypoint
+    command: "/var/log/frontail -U ${FRONTAIL_USERNAME} -P ${FRONTAIL_PASSWORD}" # args will be forwarded to the entrypoint
     environment:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_HOST: ${VIRTUAL_HOST}
