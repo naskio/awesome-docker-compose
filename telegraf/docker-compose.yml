@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  telegraf:
+    image: telegraf:latest
+    restart: always
+    container_name: telegraf
+    expose:
+      - 8125 # StatsD
+      - 8092 # UDP
+      - 8094 # TCP
+    volumes:
+      # mounting config files
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf.d:/etc/telegraf/telegraf.d:ro
+      # for other docker containers monitoring
+      #      - /var/run/docker.sock:/var/run/docker.sock:ro # Docker socket for monitoring other containers
+      - /var/run/docker.sock:/var/run/docker.sock # Docker socket for monitoring other containers
+      - logs:/var/log/telegraf:rw
+    environment:
+      MONIT_HOST: ${MONIT_HOST}
+      MONIT_USERNAME: ${MONIT_USERNAME}
+      MONIT_PASSWORD: ${MONIT_PASSWORD}
+      INFLUXDB_URL: ${INFLUX_HOST}
+      INFLUXDB_ORG: ${INFLUX_ORG}
+      INFLUXDB_BUCKET: ${INFLUX_BUCKET}
+      INFLUXDB_TOKEN: ${INFLUX_TOKEN}
+    networks:
+      - service-network
+      - monit_httpd_service-network
+      - influxdb_service-network
+
+volumes:
+  logs:
+
+networks:
+  service-network:
+  monit_httpd_service-network:
+    external: true
+  influxdb_service-network:
+    external: true
