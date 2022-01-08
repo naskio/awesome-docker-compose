@@ -1,5 +1,7 @@
 # Telegraf
 
+> it is recommended to install telegraf directly on your host machine
+
 Agent for collecting data and ingest it into InfluxDB.
 
 Configured with the following plugins:

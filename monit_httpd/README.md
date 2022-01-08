@@ -4,7 +4,9 @@ This container allows you to access monit running in the host machine via HTTP f
 
 ## Usage
 
-On Linux systems ⚠️ You have to bind your host applications to 0.0.0.0 or bridge network gateway in addition to
+> (optional)
+
+On Linux systems ⚠️ You may need to bind your host applications to 0.0.0.0 or bridge network gateway in addition to
 127.0.0.1. Use following docker command to get the bridge network gateway IP address
 
 `docker network inspect bridge --format='{{( index .IPAM.Config 0).Gateway}}`
