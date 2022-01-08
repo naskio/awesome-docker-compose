@@ -17,7 +17,7 @@ services:
       # mounting config files
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
       - ./telegraf.d:/etc/telegraf/telegraf.d:ro
-      # - ./.env:/etc/default/telegraf:ro # mounting env variables
+      - ./.env:/etc/default/telegraf:ro # mounting env variables
       # for other docker containers monitoring
       #      - /var/run/docker.sock:/var/run/docker.sock:ro # Docker socket for monitoring other containers
       - /var/run/docker.sock:/var/run/docker.sock # Docker socket for monitoring other containers
