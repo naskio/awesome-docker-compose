@@ -25,6 +25,7 @@ services:
       INFLUXDB_ORG: ${INFLUXDB_ORG}
       INFLUXDB_BUCKET: ${INFLUXDB_BUCKET}
       INFLUXDB_TOKEN: ${INFLUXDB_TOKEN}
+      HOST_NAME: ${HOST_NAME:-server}
     networks:
       - service-network
       - monit_httpd_service-network
