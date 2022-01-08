@@ -7,6 +7,8 @@ services:
     container_name: telegraf
     #    command: [ "telegraf", "--config-directory", "/etc/telegraf/telegraf.d/","--config","/etc/telegraf/telegraf.conf" ]
     command: "--config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf/telegraf.d/"
+    env_file: # runtime environment variables
+      - .env
     expose:
       - 8125 # StatsD
       - 8092 # UDP
@@ -19,7 +21,7 @@ services:
       #      - /var/run/docker.sock:/var/run/docker.sock:ro # Docker socket for monitoring other containers
       - /var/run/docker.sock:/var/run/docker.sock # Docker socket for monitoring other containers
       - logs:/var/log/telegraf:rw
-    environment:
+    environment: # build-time environment variables
       MONIT_HOST: ${MONIT_HOST}
       MONIT_USERNAME: ${MONIT_USERNAME}
       MONIT_PASSWORD: ${MONIT_PASSWORD}
