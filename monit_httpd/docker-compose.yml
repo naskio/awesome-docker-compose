@@ -11,10 +11,7 @@ services:
     environment:
       PORTS: "2812:2812" # mappings (container_port:host_port)
     networks:
-      - bridge
       - service-network
 
 networks:
-  brdige:
-    external: true
   service-network:
