@@ -7,7 +7,6 @@ services:
     container_name: telegraf
     #    command: [ "telegraf", "--config-directory", "/etc/telegraf/telegraf.d/","--config","/etc/telegraf/telegraf.conf" ]
     command: "--config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf/telegraf.d/"
-    # CMD
     expose:
       - 8125 # StatsD
       - 8092 # UDP
