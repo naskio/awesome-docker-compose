@@ -8,5 +8,11 @@ Configured with the following plugins:
     - monit (running in the host machine)
     - docker (running in the host machine)
 - outputs
-    - influxdb 
+    - influxdb
 
+## Check if telegraf is running
+
+```
+docker exec -it telegraf bash
+telegraf -config /etc/telegraf/telegraf.conf -test
+```

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frontail:
+    image: mthenw/frontail
+    restart: always
+    container_name: frontail
+    expose:
+      - 9001
+    #    command: [ "/usr/bin/frontail", "/log/nginx/access.log","${FRONTAIL_USERNAME}","${FRONTAIL_PASSWORD}" ] # customise this line to specify file, username and password
+    command: -f /var/log/syslog -U ${FRONTAIL_USERNAME} -P ${FRONTAIL_PASSWORD}
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "9001" # UI exposed from this port
+    networks:
+      - auto-reverse-proxy-global-network
+    volumes:
+      # mount a file to display to /var/log/syslog
+      - "${LOG_FILE}:/var/log/syslog"
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
