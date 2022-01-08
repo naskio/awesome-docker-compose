@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: telegraf
     command:
-      - "--config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf/telegraf.d"
+      - "-config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d"
     expose:
       - 8125 # StatsD
       - 8092 # UDP
