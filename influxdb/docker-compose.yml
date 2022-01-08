@@ -8,21 +8,26 @@ services:
     container_name: influxdb
     expose:
       - 8086
-    volumes:
-      - data:/var/lib/influxdb
-    networks:
-      - service-network
     environment:
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_USERNAME}
       DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD}
       DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_ORG:-my-org}
       DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_BUCKET:-my-bucket}
-
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "8086" # UI exposed from this port
+    volumes:
+      - data:/var/lib/influxdb
+    networks:
+      - service-network
+      - auto-reverse-proxy-global-network
 
 volumes:
   data:
 
 networks:
   service-network:
+  auto-reverse-proxy-global-network:
     external: true
