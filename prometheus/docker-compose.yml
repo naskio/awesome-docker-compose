@@ -1,0 +1,61 @@
+# node_exporter
+# blackbox_exporter
+# cAdvisor
+# prometheus
+# grafana
+# alertmanager
+# pushgateway
+
+# TODO: finish this config
+
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    restart: always
+    container_name: prometheus
+    deploy:
+      replicas: 1
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alertmanager/alert.rules/alerts.rules.yml:/alertmanager/alert.rules/alerts.rules.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=365d'
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    restart: always
+    container_name: alertmanager
+    deploy:
+      replicas: 1
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - ./alertmanager/templates/default.tmpl:/etc/alertmanager/templates/default.tmpl
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+
+  blackbox_exporter:
+    image: prom/blackbox-exporter:latest
+    restart: always
+    container_name: blackbox_exporter
+    volumes:
+      - blackbox_exporter:/config
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    restart: always
+    container_name: node_exporter
+
+  pushgateway:
+    image: prom/pushgateway:latest
+    restart: always
+    container_name: pushgateway
+
+volumes:
+  prometheus-data:
+  grafana-data:
+  blackbox_exporter:
