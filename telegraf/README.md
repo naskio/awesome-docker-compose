@@ -16,3 +16,9 @@ Configured with the following plugins:
 docker exec -it telegraf bash
 telegraf -config /etc/telegraf/telegraf.conf -test
 ```
+
+## Display logs
+
+```
+cat /home/__docker_volumes__/telegraf_logs/_data/telegraf.log
+```
