@@ -19,13 +19,15 @@ services:
       LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
       VIRTUAL_PORT: "8086" # UI exposed from this port
     volumes:
-      - data:/var/lib/influxdb
+      - data:/var/lib/influxdb2
+      - config:/etc/influxdb2
     networks:
       - service-network
       - auto-reverse-proxy-global-network
 
 volumes:
   data:
+  config:
 
 networks:
   service-network:
