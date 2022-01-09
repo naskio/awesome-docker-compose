@@ -16,12 +16,13 @@ array1+=( "Quit" )
 
 function print_menu()  # header_text, selected_item, ...menu_items
 {
-	local function_arguments=($@)
 	local header_text="$1"
 	local selected_item="$2"
-	local menu_items=(${function_arguments[@]:3})
+	local function_arguments=($@)
+	local menu_items=(${function_arguments[@]:2})
 	local menu_size="${#menu_items[@]}"
 
+  echo "${menu_items[*]}"
   echo "############### docker-compose Manager v0.1 ###############"
   echo "############### $header_text ###############"
 	for (( i = 0; i < $menu_size; ++i ))
@@ -37,10 +38,10 @@ function print_menu()  # header_text, selected_item, ...menu_items
 
 function run_menu()  # header_text, selected_item, ...menu_items
 {
-	local function_arguments=($@)
 	local header_text="$1"
 	local selected_item="$2"
-	local menu_items=(${function_arguments[@]:3})
+	local function_arguments=($@)
+	local menu_items=(${function_arguments[@]:2})
 	local menu_size="${#menu_items[@]}"
 	local menu_limit=$((menu_size - 1))
 
@@ -134,7 +135,7 @@ then
     exit 0
 fi
 
-echo "-------- running command $operation on $folder --------"
+echo "-------- RUN COMMAND $operation ON $folder --------"
 
 run_operation(){
     case $2 in
