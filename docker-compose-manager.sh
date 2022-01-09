@@ -1,5 +1,8 @@
 #!/bin/bash
 # using arrow keys to navigate through the menu
+##### setup #####
+# - chmod +x docker-compose-manager.sh
+# - create alias for the command: alias docker-compose-manager='/path/to/docker-compose-manager.sh'
 
 array=()
 while IFS=  read -r -d $'\n'; do
