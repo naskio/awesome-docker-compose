@@ -113,7 +113,7 @@ fi
 
 
 menu_header2=""
-if [ -z $(cd $folder && docker-compose ps) ]
+if [ -z $(cd $folder && docker-compose ps | sed -n '2 p') ]
 then
   menu_header2="$folder  |  status:down  |  => choose an operation: "
 else
