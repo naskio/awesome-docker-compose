@@ -95,11 +95,11 @@ function run_menu()  # selected_item, ...menu_items
 
 selected_item=0
 menu_header1="choose a folder: "
-echo "Select the folder: "
+# echo "Select the folder: "
 run_menu "$menu_header1" "$selected_item" "${array[@]}"
 menu_result="${array[$?]}"
 folder=$menu_result
-echo $menu_result
+# echo $menu_result
 clear
 
 if [ "$folder" = "Quit" ]  # Quit
@@ -111,20 +111,20 @@ fi
 
 
 menu_header2=""
-if [ -z "cd $folder docker-compose ps" ]
+if [ -z "cd $folder && docker-compose ps" ]
 then
-  menu_header2 = "$folder: down, choose an operation: "
+  menu_header2 = "$folder: down => choose an operation: "
 else
-  menu_header2 = "$folder: up, choose an operation: "
+  menu_header2 = "$folder: up => choose an operation: "
 fi
 
 selected_item1=0
 array1=("up" "down" "restart" "resync" "Quit")
-echo "Select the operation: "
+# echo "Select the operation: "
 run_menu "$menu_header2" "$selected_item1" "${array1[@]}"
 menu_result1="${array1[$?]}"
 operation=$menu_result1
-echo $menu_result1
+# echo $menu_result1
 clear
 
 if [ "$operation" = "Quit" ]  # Quit
