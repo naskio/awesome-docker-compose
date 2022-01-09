@@ -22,8 +22,8 @@ function print_menu()  # header, selected_item, ...menu_items
 	local menu_items=(${function_arguments[@]:2})
 	local menu_size="${#menu_items[@]}"
 
-  echo "############### docker-compose Manager ###############"
-  echo "############### $header ###############"
+#  echo "############### docker-compose Manager ###############"
+#  echo "############### $header ###############"
 	for (( i = 0; i < $menu_size; ++i ))
 	do
 		if [ "$i" = "$selected_item" ]
@@ -56,7 +56,7 @@ function run_menu()  # selected_item, ...menu_items
 				if [ "$input" = "[" ]  # occurs before arrow code
 				then
 					read -rsn1 -t 0.1 input
-					case "$input - 2"
+					case "$input"
 					in
 						A)  # Up Arrow
 							if [ "$selected_item" -ge 1 ]
