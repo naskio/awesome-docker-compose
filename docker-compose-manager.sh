@@ -19,7 +19,7 @@ function print_menu()  # header_text, selected_item, ...menu_items
 	local function_arguments=($@)
 	local header_text="$1"
 	local selected_item="$2"
-	local menu_items=(${function_arguments[@]:2})
+	local menu_items=(${function_arguments[@]:3})
 	local menu_size="${#menu_items[@]}"
 
   echo "############### docker-compose Manager v0.1 ###############"
@@ -40,7 +40,7 @@ function run_menu()  # header_text, selected_item, ...menu_items
 	local function_arguments=($@)
 	local header_text="$1"
 	local selected_item="$2"
-	local menu_items=(${function_arguments[@]:2})
+	local menu_items=(${function_arguments[@]:3})
 	local menu_size="${#menu_items[@]}"
 	local menu_limit=$((menu_size - 1))
 
@@ -65,7 +65,8 @@ function run_menu()  # header_text, selected_item, ...menu_items
 								clear
 								print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 							else
-							  selected_item=$((menu_limit - 1))
+#							  selected_item=$((menu_limit - 1))
+							  selected_item=$((menu_limit - 0))
 							  clear
 							  print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 							fi
