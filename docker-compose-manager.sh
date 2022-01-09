@@ -17,9 +17,12 @@ array1+=( "Quit" )
 function print_menu()  # header_text, selected_item, ...menu_items
 {
 	local header_text="$1"
-	local selected_item="$2"
-	local function_arguments=($@)
-	local menu_items=(${function_arguments[@]:2})
+	shift
+	local selected_item="$1"
+	shift
+#	local function_arguments=($@)
+#	local menu_items=(${function_arguments[@]:2})
+	local menu_items=($@)
 	local menu_size="${#menu_items[@]}"
 
   echo "${menu_items[*]}"
@@ -39,9 +42,12 @@ function print_menu()  # header_text, selected_item, ...menu_items
 function run_menu()  # header_text, selected_item, ...menu_items
 {
 	local header_text="$1"
-	local selected_item="$2"
-	local function_arguments=($@)
-	local menu_items=(${function_arguments[@]:2})
+	shift
+	local selected_item="$1"
+	shift
+#	local function_arguments=($@)
+#	local menu_items=(${function_arguments[@]:2})
+	local menu_items=($@)
 	local menu_size="${#menu_items[@]}"
 	local menu_limit=$((menu_size - 1))
 
@@ -67,7 +73,7 @@ function run_menu()  # header_text, selected_item, ...menu_items
 								print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 							else
 #							  selected_item=$((menu_limit - 1))
-							  selected_item=$((menu_limit - 0))
+							  selected_item=$menu_limit
 							  clear
 							  print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 							fi
