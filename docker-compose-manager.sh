@@ -19,12 +19,11 @@ function print_menu()  # header, selected_item, ...menu_items
 	local function_arguments=($@)
 	local header="$1"
 	local selected_item="$2"
-	local menu_items=(${function_arguments[@]:1})
-	local menu_items=(${menu_items[@]:1})
+	local menu_items=(${function_arguments[@]:2})
 	local menu_size="${#menu_items[@]}"
 
-#  echo "############### docker-compose Manager ###############"
-#  echo "############### $header ###############"
+  echo "############### docker-compose Manager ###############"
+  echo "############### $header ###############"
 	for (( i = 0; i < $menu_size; ++i ))
 	do
 		if [ "$i" = "$selected_item" ]
@@ -36,13 +35,12 @@ function print_menu()  # header, selected_item, ...menu_items
 	done
 }
 
-function run_menu()  # selected_item, ...menu_items
+function run_menu()  # header, selected_item, ...menu_items
 {
 	local function_arguments=($@)
 	local header="$1"
 	local selected_item="$2"
-	local menu_items=(${function_arguments[@]:1})
-	local menu_items=(${menu_items[@]:1})
+	local menu_items=(${function_arguments[@]:2})
 	local menu_size="${#menu_items[@]}"
 	local menu_limit=$((menu_size - 1))
 
@@ -113,11 +111,11 @@ fi
 
 
 menu_header2=""
-if [ -z "cd $folder && docker-compose ps" ]
+if [ -z $(cd $folder && docker-compose ps) ]
 then
-  menu_header2 = "$folder: down => choose an operation: "
+  menu_header2="$folder: down => choose an operation: "
 else
-  menu_header2 = "$folder: up => choose an operation: "
+  menu_header2="$folder: up => choose an operation: "
 fi
 
 selected_item1=0
