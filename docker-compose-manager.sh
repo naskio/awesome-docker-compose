@@ -5,25 +5,25 @@
 # - create alias for the command: alias docker-compose-manager='/path/to/docker-compose-manager.sh'
 # usage: run the command: docker-compose-manager
 
-array=()
+array1=()
 while IFS=  read -r -d $'\n'; do
-    array+=("$REPLY")
+    array1+=("$REPLY")
 done < <(find /home/ -regex '.*/docker-compose.ya?ml' -printf '%h\n' | sort -u)
-array+=( "Quit" )
+array1+=( "Quit" )
 
-#array=($(ls -d */))
-#array+=( "Quit" )
+#array1=($(ls -d */))
+#array1+=( "Quit" )
 
-function print_menu()  # header, selected_item, ...menu_items
+function print_menu()  # header_text, selected_item, ...menu_items
 {
 	local function_arguments=($@)
-	local header="$1"
+	local header_text="$1"
 	local selected_item="$2"
 	local menu_items=(${function_arguments[@]:2})
 	local menu_size="${#menu_items[@]}"
 
-  echo "############### docker-compose Manager ###############"
-  echo "############### $header ###############"
+  echo "############### docker-compose Manager v0.1 ###############"
+  echo "############### $header_text ###############"
 	for (( i = 0; i < $menu_size; ++i ))
 	do
 		if [ "$i" = "$selected_item" ]
@@ -35,17 +35,17 @@ function print_menu()  # header, selected_item, ...menu_items
 	done
 }
 
-function run_menu()  # header, selected_item, ...menu_items
+function run_menu()  # header_text, selected_item, ...menu_items
 {
 	local function_arguments=($@)
-	local header="$1"
+	local header_text="$1"
 	local selected_item="$2"
 	local menu_items=(${function_arguments[@]:2})
 	local menu_size="${#menu_items[@]}"
 	local menu_limit=$((menu_size - 1))
 
 	clear
-	print_menu "$header" "$selected_item" "${menu_items[@]}"
+	print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 
 	while read -rsn1 input
 	do
@@ -63,11 +63,11 @@ function run_menu()  # header, selected_item, ...menu_items
 							then
 								selected_item=$((selected_item - 1))
 								clear
-								print_menu "$header" "$selected_item" "${menu_items[@]}"
+								print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 							else
 							  selected_item=$((menu_limit - 1))
 							  clear
-							  print_menu "$header" "$selected_item" "${menu_items[@]}"
+							  print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 							fi
 							;;
 						B)  # Down Arrow
@@ -75,11 +75,11 @@ function run_menu()  # header, selected_item, ...menu_items
 							then
 								selected_item=$((selected_item + 1))
 								clear
-								print_menu "$header" "$selected_item" "${menu_items[@]}"
+								print_menu "$header_text" "$selected_item" "${menu_items[@]}"
               else # selected_item = menu_limit
                 selected_item=0
                 clear
-                print_menu "$header" "$selected_item" "${menu_items[@]}"
+                print_menu "$header_text" "$selected_item" "${menu_items[@]}"
 							fi
 							;;
 					esac
@@ -93,13 +93,13 @@ function run_menu()  # header, selected_item, ...menu_items
 	done
 }
 
-selected_item=0
+selected_item1=0
 menu_header1="choose a folder: "
 # echo "Select the folder: "
-run_menu "$menu_header1" "$selected_item" "${array[@]}"
-menu_result="${array[$?]}"
-folder=$menu_result
-# echo $menu_result
+run_menu "$menu_header1" "$selected_item1" "${array1[@]}"
+menu_result1="${array1[$?]}"
+folder=$menu_result1
+# echo $menu_result1
 clear
 
 if [ "$folder" = "Quit" ]  # Quit
@@ -118,13 +118,13 @@ else
   menu_header2="$folder: up => choose an operation: "
 fi
 
-selected_item1=0
-array1=("up" "down" "restart" "resync" "Quit")
+selected_item2=0
+array2=("up" "down" "restart" "resync" "Quit")
 # echo "Select the operation: "
-run_menu "$menu_header2" "$selected_item1" "${array1[@]}"
-menu_result1="${array1[$?]}"
-operation=$menu_result1
-# echo $menu_result1
+run_menu "$menu_header2" "$selected_item2" "${array2[@]}"
+menu_result2="${array2[$?]}"
+operation=$menu_result2
+# echo $menu_result2
 clear
 
 if [ "$operation" = "Quit" ]  # Quit
