@@ -52,11 +52,11 @@ function run_menu()  # selected_item, ...menu_items
 		case "$input"
 		in
 			$'\x1B')  # ESC ASCII code (https://dirask.com/posts/ASCII-Table-pJ3Y0j)
-				read -rsn1 -t 0.3 input
+				read -rsn1 -t 0.1 input
 				if [ "$input" = "[" ]  # occurs before arrow code
 				then
-					read -rsn1 -t 0.3 input
-					case "$input"
+					read -rsn1 -t 0.1 input
+					case "$input - 2"
 					in
 						A)  # Up Arrow
 							if [ "$selected_item" -ge 1 ]
@@ -84,7 +84,7 @@ function run_menu()  # selected_item, ...menu_items
 							;;
 					esac
 				fi
-				read -rsn5 -t 0.3  # flushing stdin
+				read -rsn5 -t 0.1  # flushing stdin
 				;;
 			"")  # Enter key
 				return "$selected_item"
