@@ -9,14 +9,20 @@ services:
     expose:
       - "9000" # S3_PORT
       - "9001" # S3_CLI_PORT
-#    ports:
+    #    ports:
     #      - ${S3_PORT}:9000
     #      - ${S3_CLI_PORT}:9001
     environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "9000" # we expose S3 to serve files to the public
       MINIO_ROOT_USER: ${S3_ACCESS_KEY_ID}
       MINIO_ROOT_PASSWORD: ${S3_SECRET_ACCESS_KEY}
+      S3_ENDPOINT_URL: "http://${VIRTUAL_HOST:-minio:9000}" # default to http://minio:9000
+      #      S3_ENDPOINT_URL: "http://minio:9000"
       #      S3_ENDPOINT_URL: "http://${S3_HOST}:${S3_PORT}"
-      S3_ENDPOINT_URL: "http://minio:9000"
+      #      MINIO_BROWSER_REDIRECT_URL: "http://localhost:9001"
     healthcheck:
       #      test: [ "CMD", "curl", "-f", "http://${S3_HOST}:${S3_PORT}/minio/health/live" ]
       test: [ "CMD", "curl", "-f", "http://minio:9000/minio/health/live" ]
@@ -27,9 +33,12 @@ services:
       - s3_data:/data
     networks:
       - service-network
+      - auto-reverse-proxy-global-network
 
 volumes:
   s3_data:
 
 networks:
   service-network:
+  auto-reverse-proxy-global-network:
+    external: true
