@@ -32,7 +32,7 @@ services:
     volumes:
       - uploads:/directus/uploads # uploads are stored in /directus/uploads
       - ./extensions:/directus/extensions:ro # If you want to load extensions from the host
-      #      - database:/directus/database # SQLite
+      - database:/directus/database # SQLite folder even if disabled
     networks:
       - auto-reverse-proxy-global-network
       - postgres_service-network
@@ -48,4 +48,4 @@ networks:
 
 volumes:
   uploads:
-#  database:
+  database:
