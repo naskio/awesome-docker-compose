@@ -1,0 +1,36 @@
+version: '3'
+
+
+services:
+  directus:
+    container_name: directus
+    image: directus/directus:latest
+    expose:
+      - "8055"
+    environment:
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+      CACHE_ENABLED: "false"
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL} # directus admin email
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD} # directus admin password
+      #      DB_CLIENT: "${DB_CLIENT:-sqlite}" # DB config
+      #      PUBLIC_URL: '${DIRECTUS_PUBLIC_URL}'
+      PUBLIC_URL: 'https://${VIRTUAL_HOST}'
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "8055" # UI exposed from this port
+    volumes:
+      - uploads:/directus/uploads # uploads are stored in /directus/uploads
+      - database:/directus/database # SQLite
+      - ./extensions:/directus/extensions:ro # If you want to load extensions from the host
+    networks:
+      - auto-reverse-proxy-global-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+
+volumes:
+  uploads:
+  database:
