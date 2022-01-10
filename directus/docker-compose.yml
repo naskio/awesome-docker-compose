@@ -1,0 +1,51 @@
+version: '3'
+
+
+services:
+  directus:
+    container_name: directus
+    image: directus/directus:latest
+    expose:
+      - "8055"
+    environment:
+      KEY: '${DIRECTUS_KEY}'
+      SECRET: '${DIRECTUS_SECRET}'
+      DB_CLIENT: "${DB_CLIENT:-pg}" # DB config
+      DB_HOST: "${DB_HOST:-postgres}" # DB config
+      DB_PORT: "${DB_PORT:-5432}"
+      DB_DATABASE: "${DB_DATABASE:-directus}" # DB config
+      DB_USER: "${DB_USER:-directus}" # DB config
+      DB_PASSWORD: "${DB_PASSWORD:-directus}" # DB config
+      CACHE_ENABLED: "${CACHE_ENABLED:-false}" # caching
+      #      CACHE_STORE: "${CACHE_STORE:-redis}"
+      #      CACHE_REDIS: "${CACHE_REDIS}"
+      #      CACHE_REDIS: 'redis://redis:6379'
+      #      CACHE_REDIS: 'redis://:password@redis:6379'
+      ADMIN_EMAIL: '${DIRECTUS_ADMIN_EMAIL}' # directus admin email
+      ADMIN_PASSWORD: '${DIRECTUS_ADMIN_PASSWORD}' # directus admin password
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "8055" # UI exposed from this port
+      PUBLIC_URL: 'https://${VIRTUAL_HOST}'
+      #      PUBLIC_URL: '${DIRECTUS_PUBLIC_URL}'
+    volumes:
+      - uploads:/directus/uploads # uploads are stored in /directus/uploads
+      - ./extensions:/directus/extensions:ro # If you want to load extensions from the host
+      #      - database:/directus/database # SQLite
+    networks:
+      - auto-reverse-proxy-global-network
+      - postgres_service-network
+#      - redis_service-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  postgres_service-network:
+    external: true
+#  redis_service-network:
+#    external: true
+
+volumes:
+  uploads:
+#  database:
