@@ -14,3 +14,7 @@ We use SQLite and we disable redis.
 ## Postgres
 
 We use Postgres as database without caching.
+
+## S3 Integration
+
+check [this](https://v8.docs.directus.io/extensions/storage-adapters.html#core-adapters)
