@@ -9,6 +9,10 @@ services:
       - "1337"
     #    env_file: .env
     environment:
+      # configuration: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations.html
+      # more variables: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.html#strapi-s-environment-variables
+      NODE_ENV: 'production'
+      # API_TOKEN_SALT:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}

@@ -28,6 +28,8 @@ services:
       LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
       VIRTUAL_PORT: "8055" # UI exposed from this port
       PUBLIC_URL: 'https://${VIRTUAL_HOST}'
+      DIRECTUS_ENV: 'production'
+      # more variables: https://v8.docs.directus.io/docker/environment.html#all-variables
       #      PUBLIC_URL: '${DIRECTUS_PUBLIC_URL}'
     volumes:
       - uploads:/directus/uploads # uploads are stored in /directus/uploads
