@@ -8,10 +8,10 @@ services:
     command: server /data --console-address ":9001"
     expose:
       - "9000" # S3_PORT
-      - "9001" # S3_CLI_PORT
+      - "9001" # S3_CONSOLE_PORT
     #    ports:
     #      - ${S3_PORT}:9000
-    #      - ${S3_CLI_PORT}:9001
+    #      - ${S3_CONSOLE_PORT}:9001
     environment:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_HOST: ${VIRTUAL_HOST}
