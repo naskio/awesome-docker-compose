@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  strapi:
+    image: strapi/strapi
+    restart: always # unless-stopped
+    container_name: strapi
+    expose:
+      - "1337"
+    #    env_file: .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "1337" # UI exposed from this port
+    #      DATABASE_SSL: boolean for SSL.
+    #      EXTRA_ARGS: pass extra args to the strapi new.
+
+    volumes:
+      - data:/srv/app # where we build the strapi app
+    networks:
+      - auto-reverse-proxy-global-network
+      - postgres_service-network
+#      - mongodb_service-network
+
+volumes:
+  data:
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  postgres_service-network:
+    external: true
+#  mongodb_service-network:
+#    external: true
