@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  minio_console:
+    restart: always
+    image: minio/console
+    container_name: minio_console
+    environment:
+      CONSOLE_MINIO_SERVER: "${CONSOLE_MINIO_SERVER:-http://minio:9000}"
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "9001" # UI exposed from this port
+    expose:
+      - "9001"
+    networks:
+      - auto-reverse-proxy-global-network
+      - minio_service-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  minio_service-network:
+    external: true
