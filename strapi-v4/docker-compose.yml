@@ -29,19 +29,23 @@ services:
       LETSENCRYPT_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
       VIRTUAL_PORT: "1337" # UI exposed from this port
+      URL: http://strapi.nask.io
+      # ADMIN_URL: https://strapi.nask.io/admin
+      # PROXY: true
+      STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE: fr # en
     #      DATABASE_CLIENT_PROD: ${DATABASE_CLIENT}
     #      DATABASE_HOST_PROD: ${DATABASE_HOST}
     #      DATABASE_PORT_PROD: ${DATABASE_PORT}
     #      DATABASE_NAME_PROD: ${DATABASE_NAME}
     #      DATABASE_USERNAME_PROD: ${DATABASE_USERNAME}
     #      DATABASE_PASSWORD_PROD: ${DATABASE_PASSWORD}
-    #      HOST: ${HOST:-localhost}
-    #      PORT: ${PORT:-1337}
-    #      DATABASE_SSL: boolean for SSL.
-    #      EXTRA_ARGS: pass extra args to the strapi new.
-
+      # HOST: strapi.nask.io # ${HOST:-localhost}
+      # PORT: 1337 # ${PORT:-1337}
+      DATABASE_SSL: false # boolean for SSL.
+      # EXTRA_ARGS: pass extra args to the strapi new.
     volumes:
       - data:/srv/app # where we build the strapi app
+      - ./config/middlewares.js:/srv/app/config/middlewares.js
     networks:
       - auto-reverse-proxy-global-network
       - postgres_service-network
