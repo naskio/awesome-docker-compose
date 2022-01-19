@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  nginx-gatsby-js:
+    restart: always
+    image: nginx:latest
+    container_name: nginx-gatsby-js
+    expose:
+      - 80
+    ports:
+      - "8000:80"
+    volumes:
+      - ${SOURCE_DIR:-./src}:/usr/share/nginx/html:ro
+      - ./sites-available/default.conf:/etc/nginx/sites-available/default:ro
+      - cache:/var/cache/nginx
+    #      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    #      - ./templates:/etc/nginx/templates
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "80" # proxy exposed from this port
+    networks:
+      - auto-reverse-proxy-global-network
+      - postgres_service-network
+
+volumes:
+  cache:
+
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  postgres_service-network:
+    external: true
