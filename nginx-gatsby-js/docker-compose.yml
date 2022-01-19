@@ -7,20 +7,21 @@ services:
     container_name: nginx-gatsby-js
     expose:
       - "80"
+      - "443"
     volumes:
-      - ${SOURCE_DIR:-./src}:/usr/share/nginx/html:ro
-      - ./sites-available/default.conf:/etc/nginx/sites-available/default:ro
       - cache:/var/cache/nginx
-    #      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    #      - ./templates:/etc/nginx/templates
+      - ${SOURCE_DIR:-./src}:/usr/share/nginx/html:ro
+      - ./sites-available/default.conf:/etc/nginx/conf.d/default.conf:ro
+      #      - ./sites-available/default.conf:/etc/nginx/sites-available/default:ro
+      #      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      #      - ./templates:/etc/nginx/templates
     environment:
-      #      HTTPS_METHOD: "redirect"
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
-      VIRTUAL_PORT: "80" # proxy exposed from this port
-      NGINX_HOST: ${VIRTUAL_HOST}
-      NGINX_PORT: "80"
+      #      VIRTUAL_PORT: "80" # proxy exposed from this port
+      #      NGINX_HOST: ${VIRTUAL_HOST}
+      #      NGINX_PORT: "80"
     networks:
       - auto-reverse-proxy-global-network
 
