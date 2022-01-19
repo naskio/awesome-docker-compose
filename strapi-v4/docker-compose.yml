@@ -1,5 +1,7 @@
 version: "3"
 
+# TODO: use separate container for admin panel + disable serving admin panel in the server
+
 services:
   strapi-v4:
     # image: strapi/strapi:latest
