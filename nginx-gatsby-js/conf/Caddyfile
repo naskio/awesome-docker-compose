@@ -1,4 +1,4 @@
-0.0.0.0:3000 {
+0.0.0.0:80 {
 	gzip
 	log / stdout "{method} {path} {status}"
 	root /usr/share/caddy/html

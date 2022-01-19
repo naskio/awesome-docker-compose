@@ -6,7 +6,7 @@ services:
     image: nginx:latest
     container_name: nginx-gatsby-js
     expose:
-      - "7000"
+      - "80"
     volumes:
       - cache:/var/cache/nginx
       - ${SOURCE_DIR:-./src}:/usr/share/nginx/html:ro
@@ -15,7 +15,7 @@ services:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
-      VIRTUAL_PORT: "7000" # proxy exposed from this port
+      VIRTUAL_PORT: "80" # proxy exposed from this port
     networks:
       - auto-reverse-proxy-global-network
 
