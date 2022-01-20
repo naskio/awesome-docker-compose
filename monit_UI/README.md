@@ -2,6 +2,8 @@
 
 Display monit status in a web UI. In order to monitor the single node where Docker is running.
 
+> ⚠️ it is recommended to install monit directly on the host machine (don't run monit inside a docker container).
+
 ## Prerequisites
 
 - Monit running on the host machine

@@ -1,6 +1,6 @@
 # Telegraf
 
-> it is recommended to install telegraf directly on your host machine
+> > ⚠️ it is recommended to install Telegraf directly on the host machine (don't run telegraf inside a docker container).
 
 Agent for collecting data and ingest it into InfluxDB.
 

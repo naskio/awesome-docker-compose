@@ -2,6 +2,8 @@
 
 This container allows you to access monit running in the host machine via HTTP from another container.
 
+> ⚠️ it is recommended to install monit directly on the host machine (don't run monit inside a docker container).
+
 ## Usage
 
 > (optional)
