@@ -2,6 +2,20 @@
 
 Docker compose declarations for different backend services such as: MongoDB, Redis, Postgres, etc.
 
+## Manager
+
+Install [docker-compose-manager](https://github.com/naskio/docker-compose-manager) (local version)
+
+```shell
+bash <(curl -sSL https://raw.githubusercontent.com/naskio/docker-compose-manager/main/install.sh)
+```
+
+Usage
+
+```shell
+dcm
+```
+
 ## Step-by-step guide
 
 - Start by configuring the env variables in the `.env` file inside the service folder.
@@ -17,15 +31,15 @@ In order to connect your app with any service, you need to add the following to 
 - Connect to the service using the connection string `${PROTOCOL}://${SERVICE_NAME}:{$CONTAINER_PORT}/`.
 
 - For example, to connect the app to:
-    - MongoDB service, you can use the connection string `mongodb://mongodb:27017/`.
-    - Redis service, you can use the connection string `redis://redis:6379/`.
-    - Postgres service, you can use the connection string `postgres://postgres:5432/`.
-    - Postgis service, you can use the connection string `postgres://postgres:5432/`.
-    - MySQL service, you can use the connection string `mysql://mysql:3306/`.
-    - Elasticsearch service, you can use the connection string `http://elasticsearch:9200/`.
-    - Minio service, you can use the connection string `http://minio:9000/`.
-    - RabbitMQ service, you can use the connection string `amqp://rabbitmq:5672/`.
-    - RabbitMQ with management plugin, you can use the connection string `amqp://rabbitmq_mngt:5672/`.
+  - MongoDB service, you can use the connection string `mongodb://mongodb:27017/`.
+  - Redis service, you can use the connection string `redis://redis:6379/`.
+  - Postgres service, you can use the connection string `postgres://postgres:5432/`.
+  - Postgis service, you can use the connection string `postgres://postgres:5432/`.
+  - MySQL service, you can use the connection string `mysql://mysql:3306/`.
+  - Elasticsearch service, you can use the connection string `http://elasticsearch:9200/`.
+  - Minio service, you can use the connection string `http://minio:9000/`.
+  - RabbitMQ service, you can use the connection string `amqp://rabbitmq:5672/`.
+  - RabbitMQ with management plugin, you can use the connection string `amqp://rabbitmq_mngt:5672/`.
 
 - In order to use adminer, go to `https://{VIRTUAL_HOST}/`.
 - In order to use kibana, go to `https://{VIRTUAL_HOST}/`.
