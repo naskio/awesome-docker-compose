@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  adminer:
+    restart: always
+    image: adminer
+    container_name: adminer
+    ports:
+      - "${HOST_PORT:-8080}:8080"
+
+networks:
+  default:
+    external: true
+    name: l_shared-network
