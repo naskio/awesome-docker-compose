@@ -8,6 +8,8 @@ Install [docker-compose-manager](https://github.com/naskio/docker-compose-manage
 bash <(curl -sSL https://raw.githubusercontent.com/naskio/docker-compose-manager/main/install.sh) local
 ```
 
+To use it, launch `dcm` command in your project directory.
+
 ## Setup
 
 ### Create global network called l_shared-network

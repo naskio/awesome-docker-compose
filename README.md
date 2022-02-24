@@ -2,20 +2,6 @@
 
 Docker compose declarations for different backend services such as: MongoDB, Redis, Postgres, etc.
 
-## Manager
-
-Install [docker-compose-manager](https://github.com/naskio/docker-compose-manager) (local version)
-
-```shell
-bash <(curl -sSL https://raw.githubusercontent.com/naskio/docker-compose-manager/main/install.sh)
-```
-
-Usage
-
-```shell
-dcm
-```
-
 ## Step-by-step guide
 
 - Start by configuring the env variables in the `.env` file inside the service folder.
@@ -46,7 +32,3 @@ In order to connect your app with any service, you need to add the following to 
 - In order to use rabbitmq manager, go to `https://{VIRTUAL_HOST}/`.
 - In order to use Flower, go to `https://{VIRTUAL_HOST}/`.
 
-## Alternative strategy
-
-Define all services in one `docker-compose.yml` file, and then run `docker-compose up -d` to start all services or start
-only few services `docker-compose up -d minio`
