@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    restart: always
+    image: elasticsearch:7.16.2
+    container_name: elasticsearch
+    environment:
+      - node.name=es-node
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+    volumes:
+      - data:/usr/share/elasticsearch/data
+    expose:
+      - 9200
+
+volumes:
+  data:
+
+networks:
+  default:
+    external: true
+    name: l_shared-network
