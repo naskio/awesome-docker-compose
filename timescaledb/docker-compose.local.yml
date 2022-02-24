@@ -7,23 +7,19 @@ services:
     container_name: timescaledb
     environment:
       TIMESCALEDB_TELEMETRY: off # disable telemetry for collecting anonymous usage statistics
-      #      NO_TS_TUNE: true # disable ts_tune for tuning timescaledb (check available resources on the host)
-      #      TS_TUNE_MEMORY: 4GB
-      #      TS_TUNE_NUM_CPUS: 4
-      #      TS_TUNE_MAX_BG_WORKERS: 16
-      #      TS_TUNE_MAX_CONNS: 200
       POSTGRES_DB: ${POSTGRES_DB} # initial database name,  when the image is first started
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    #      POSTGRES_HOST_AUTH_METHOD: "trust" # trust mode (only for dev purposes)
     expose:
       - 5432
     volumes:
       - data:/var/lib/postgresql/data
-    networks:
-      - service-network
 
 volumes:
   data:
 
 networks:
-  service-network:
+  default:
+    external: true
+    name: l_shared-network
