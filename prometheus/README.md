@@ -4,13 +4,13 @@ Prometheus is a tool for large-scale monitoring.
 
 ## Prerequisites
 
-- Usage of `jwilder/nginx-proxy`
+- Usage of `nginxproxy/nginx-proxy`
 - existing docker networks `auto-reverse-proxy-global-network`
 
 ### Timeseries database
 
 - (prometheus)[https://prometheus.io/] is used to store the data.
-    - We use jwilder/nginx-proxy to deploy Prometheus as docker container.
+    - We use nginxproxy/nginx-proxy to deploy Prometheus as docker container.
 
 ### Exporters
 
@@ -33,7 +33,7 @@ Exporters are targets for Prometheus to scrape.
 We can use:
 
 - [grafana](https://prometheus.io/docs/visualization/grafana/) to visualize the data.
-    - We use jwilder/nginx-proxy to deploy Grafana as docker container.
+    - We use nginxproxy/nginx-proxy to deploy Grafana as docker container.
 - [Expression browser](https://prometheus.io/docs/introduction/exposition_formats/#expression-browser) to visualize the
   data.
     - [/graph](https://prometheus.io/docs/visualization/browser/)

@@ -4,7 +4,7 @@ Flower enables you to monitor your celery workers and tasks, and see the results
 
 ## Prerequisites
 
-- Usage of `jwilder/nginx-proxy`
+- Usage of `nginxproxy/nginx-proxy`
 - Celery workers running
 - RabbitMQ as broker
 - existing docker networks `auto-reverse-proxy-global-network` and `rabbitmq_service-network`
