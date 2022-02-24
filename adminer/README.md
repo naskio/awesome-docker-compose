@@ -13,7 +13,7 @@ MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and o
 
 # Setup in production environment
 
-In production, we use `nginxproxy/nginx-proxy` to proxy the container `CONTAINER_PORT` to the internet.
+In production, we use `nginxproxy/nginx-proxy` to proxy the container from `CONTAINER_PORT` to the internet.
 
 ## Prerequisites
 
@@ -21,13 +21,11 @@ In production, we use `nginxproxy/nginx-proxy` to proxy the container `CONTAINER
   - auto-reverse-proxy network `auto-reverse-proxy-global-network`.
 - Required service networks:
   - postgres network `postgres_service-network`.
-- Optional service networks:
-  - redis network `redis_service-network`.
 
 -------------------------------------------------------------------------------
 
 # Setup in development environment
 
-In development mode, the container `HOST_PORT` is exposed to localhost.
+In development mode, the container is exposed to localhost at `HOST_PORT`.
 
 > No need for service networks since all containers are part of the shared network `l_shared-network`.

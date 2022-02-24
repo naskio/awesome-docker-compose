@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  adminmongo:
+    restart: always
+    image: mrvautin/adminmongo:latest
+    container_name: adminmongo
+    environment:
+      PASSWORD: ${AM_USERNAME}
+      MONITORING: ${MONITORING_ENABLED:-true}
+      # mongodb://<user>:<password>@mongodb:<port>/<db>
+      CONN_NAME: ${CONN_NAME:-mongodb}    # The name of the connection to create on boot
+      DB_USERNAME: ${MONGO_USER:-mongodb}    # The username for the database connection
+      DB_PASSWORD: ${MONGO_PASSWORD}    # The password for the database user
+      DB_HOST: ${MONGO_HOST:-mongodb}    # The hostname of the database server
+      DB_PORT: ${MONGO_PORT:-27017}    # The port of the mongoDB database, if not provided the default 27017 will be used
+      DB_NAME: ${MONGO_DB:-mongodb}    # The name of the database to connect to
+    ports:
+      - "${HOST_PORT:-1234}:1234"
+    networks:
+      - auto-reverse-proxy-global-network
+      - mongodb_service-network
+
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
+  mongodb_service-network:
+    external: true
