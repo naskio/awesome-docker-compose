@@ -17,13 +17,9 @@ services:
       DB_NAME: ${MONGO_DB:-mongodb}    # The name of the database to connect to
     ports:
       - "${HOST_PORT:-1234}:1234"
-    networks:
-      - auto-reverse-proxy-global-network
-      - mongodb_service-network
 
 
 networks:
-  auto-reverse-proxy-global-network:
+  default:
     external: true
-  mongodb_service-network:
-    external: true
+    name: l_shared-network
