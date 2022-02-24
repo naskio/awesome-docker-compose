@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  frontail:
+    image: mthenw/frontail
+    restart: always
+    container_name: frontail
+    ports:
+      - "${HOST_PORT:-9001}:9001"
+    command: "/var/log/frontail -U ${FRONTAIL_USERNAME} -P ${FRONTAIL_PASSWORD}" # args will be forwarded to the entrypoint
+    volumes:
+      - "${LOG_FILE}:/var/log/frontail" # mount a file to display to /var/log/syslog
+
+networks:
+  default:
+    external: true
+    name: l_shared-network
