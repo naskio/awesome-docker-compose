@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  meilisearch:
+    restart: always
+    image: getmeili/meilisearch:latest
+    container_name: meilisearch
+    #    command: ./meilisearch --master-key=masterKey --no-analytics=true
+    command: "--master-key=${MASTER_KEY} --no-analytics=${NO_ANALYTICS}" # args will be forwarded to the entrypoint
+    volumes:
+      - data:/data.ms
+    expose:
+      - "7700"
+
+volumes:
+  data:
+
+networks:
+  default:
+    external: true
+    name: l_shared-network
