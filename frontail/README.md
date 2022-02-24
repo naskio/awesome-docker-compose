@@ -1,4 +1,4 @@
-# Adminer
+# frontail
 
 Display a log file in a web browser
 
