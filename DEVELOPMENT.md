@@ -14,7 +14,7 @@ To use it, launch `dcm` command in your project directory.
 
 ### A shared network for communication between containers
 
-We created a network called `l_shared-network`. This network is used to connect all services to each other.
+We create a network called `l_shared-network`. This network is used to connect all services to each other.
 
 ```shell
 docker network create l_shared-network
@@ -22,13 +22,13 @@ docker network create l_shared-network
 docker network rm l_shared-network
 ```
 
-### How we enabled intra-cluster communication ?
+### How we enable intra-cluster communication ?
 
-We add all services to the same network `l_shared-network`.
+We connect all services to the same network `l_shared-network`.
 
 > Services can be reachable in the same network at `$SERVICE_NAME:$CONTAINER_PORT`.
 
-### How we expose services (UI-based) to localhost ?
+### How we expose services to localhost ?
 
 For exposing services to localhost, we add `ports`to `docker-compose.local.yml` with value `$HOST_PORT:$CONTAINER_PORT`.
 
