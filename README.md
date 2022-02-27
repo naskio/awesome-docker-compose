@@ -74,7 +74,7 @@ and [PRODUCTION SETUP](./PRODUCTION.md) files and get inspired from existing ser
 Pull requests are welcome. For any issue, please open an issue
 on [GitHub](https://www.github.com/naskio/awesome-docker-compose/issues).
 
-See the [contributor guide](./CONTRIBUTING.md) for more information.
+See the [contributing guide](./CONTRIBUTING.md) for more information.
 
 ## License
 
