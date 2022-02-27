@@ -10,9 +10,12 @@ bash <(curl -sSL https://raw.githubusercontent.com/naskio/docker-compose-manager
 
 To use it, launch `dcm` command in your project directory.
 
-## Setup
+## Setup Overview
 
-### Create global network called auto-reverse-proxy-global-network
+### A global network for proxying
+
+We create a global network called `auto-reverse-proxy-global-network`. This network is used to
+allow `nginxproxy/nginx-proxy` to proxy the containers and expose them to the internet.
 
 ```shell
 docker network create auto-reverse-proxy-global-network
@@ -20,26 +23,25 @@ docker network create auto-reverse-proxy-global-network
 docker network rm auto-reverse-proxy-global-network
 ```
 
-This network is used to allow `nginxproxy/nginx-proxy` to proxy the containers and expose them to the internet.
+### How we enabled intra-cluster communication ?
 
-### Intra-cluster communication
-
-To enable intra-cluster communication, add the `${SERVICE_NAME}_service-network` network to the container for each
-required service. We can also add optional services when the container is running by adding
-the `${SERVICE_NAME}_service-network` network.
+To enable intra-cluster communication, we created a network `${SERVICE_NAME}_service-network` for each backend service.
+Then we connect the containers if they depend on the service to this network (required service). We can also add
+optional services when the container is running by adding the `${SERVICE_NAME}_service-network` network using the
+command `docker network connect ${SERVICE_NAME}_service-network ${CONTAINER_NAME}` or via `Portainer`.
 
 > Services can be reachable from within the container at `$SERVICE_NAME:$CONTAINER_PORT`.
 
-### Exposing services (UIs)
+### How we expose services (UI-based) to the internet ?
 
 For exposing services to the internet:
 
-- add `expose`to `docker-compose.yml` with value `$CONTAINER_PORT`.
-- add `VIRTUAL_PORT` to `docker-compose.yml` environment with the value of `$CONTAINER_PORT`.
-- add `VIRTUAL_HOST` and `LETSENCRYPT_HOST` to `docker-compose.yml` environment with the value of `$DOMAIN_NAME`
-  /`$SUBDOMAIN_NAME`.
-- add `WEBMASTER_EMAIL` to `docker-compose.yml` environment with the value of `webmaster@$DOMAIN_NAME`.
-- add container to network `auto-reverse-proxy-global-network`.
+- we add `expose`to `docker-compose.yml` with value `$CONTAINER_PORT`.
+- we add `VIRTUAL_PORT` to `docker-compose.yml` environment with the value of `$CONTAINER_PORT`.
+- we add `VIRTUAL_HOST` and `LETSENCRYPT_HOST` to `docker-compose.yml` environment with the value of `$DOMAIN_NAME`
+  or `$SUBDOMAIN_NAME`.
+- we add `WEBMASTER_EMAIL` to `docker-compose.yml` environment with the value of `webmaster@$DOMAIN_NAME`.
+- we add container to network `auto-reverse-proxy-global-network`.
 
 `$CONTAINER_PORT`: the port exposed by the container that will be reachable from the internet.
 `$DOMAIN_NAME`: the domain name.

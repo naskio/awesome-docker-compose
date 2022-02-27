@@ -10,9 +10,11 @@ bash <(curl -sSL https://raw.githubusercontent.com/naskio/docker-compose-manager
 
 To use it, launch `dcm` command in your project directory.
 
-## Setup
+## Setup Overview
 
-### Create global network called l_shared-network
+### A shared network for communication between containers
+
+We created a network called `l_shared-network`. This network is used to connect all services to each other.
 
 ```shell
 docker network create l_shared-network
@@ -20,16 +22,14 @@ docker network create l_shared-network
 docker network rm l_shared-network
 ```
 
-This network is used to connect all services to each other.
+### How we enabled intra-cluster communication ?
 
-### Intra-cluster communication
-
-Add all services to the same network `l_shared-network`.
+We add all services to the same network `l_shared-network`.
 
 > Services can be reachable in the same network at `$SERVICE_NAME:$CONTAINER_PORT`.
 
-### Exposing services (UIs)
+### How we expose services (UI-based) to localhost ?
 
-For exposing services to localhost, add `ports`to `docker-compose.local.yml` with value `$HOST_PORT:$CONTAINER_PORT`.
+For exposing services to localhost, we add `ports`to `docker-compose.local.yml` with value `$HOST_PORT:$CONTAINER_PORT`.
 
 > We can access the service from `http://localhost:$HOST_PORT`.
