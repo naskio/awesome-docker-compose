@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongodb:
+    restart: always
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+    expose:
+      - 27017
+    volumes:
+      - data:/data/db
+      - logs:/var/log/mongodb
+      - configdb:/data/configdb
+
+volumes:
+  data:
+  logs:
+  configdb:
+
+networks:
+  default:
+    external: true
+    name: l_shared-network
