@@ -58,9 +58,16 @@ To use a service from this collection in production mode:
 
 - [Adminer](./adminer): (formerly phpMinAdmin) is a full-featured database management tool written in PHP.
 - [adminMongo](./adminmongo): web-based user interface for MongoDB.
+- [Chronograf](./chronograf): UI for InfluxDB v1+.
 - [ElasticSearch](./elasticsearch): full-text search and analytics engine.
-
-TODO: complete the available services list.
+- [frontail](./frontail): web-based log file browser.
+- [InfluxDB](./influxdb): v2+, Timeseries database with integrated UI.
+- [MeiliSearch](./meilisearch): a distributed search engine that is optimized for real-time search.
+- [MongoDB](./mongodb): NoSQL database.
+- [MySQL](./mysql): SQL database.
+- [PostGIS](./postgis): Postgres database with GIS extensions.
+- [Postgres](./postgres): SQL database.
+- [TimeScaleDB](./timescaledb): Time Series Database based on Postgres.
 
 ### Adding a new service
 
