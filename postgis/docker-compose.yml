@@ -9,8 +9,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB} # initial database name,  when the image is first started
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      TZ: '${TZ:-UTC}'
-      PGTZ: '${TZ:-UTC}'
+      TZ: '${TZ:-Etc/UTC}'
+      PGTZ: '${TZ:-Etc/UTC}'
     expose:
       - 5432
     volumes:
