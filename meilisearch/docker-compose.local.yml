@@ -9,8 +9,8 @@ services:
     command: "--master-key=${MASTER_KEY} --no-analytics=${NO_ANALYTICS}" # args will be forwarded to the entrypoint
     volumes:
       - data:/data.ms
-    expose:
-      - "7700"
+    ports:
+      - "${HOST_PORT:-7700}:7700"
 
 volumes:
   data:
