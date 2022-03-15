@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  swagger-ui:
+    restart: always
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${WEBMASTER_EMAIL}
+      VIRTUAL_PORT: "8080"
+    expose:
+      - "8080"
+    networks:
+      - auto-reverse-proxy-global-network
+
+networks:
+  auto-reverse-proxy-global-network:
+    external: true
