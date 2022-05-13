@@ -8,8 +8,8 @@ services:
     shm_size: 2gb
     expose:
       - 4444
-    networks:
-      - service-network
 
 networks:
-  service-network:
+  default:
+    external: true
+    name: l_shared-network
